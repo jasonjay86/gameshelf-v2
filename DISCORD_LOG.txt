@@ -1,0 +1,5 @@
+[2026-05-25] Frontend design initialized.
+- Created `DESIGN_FRONTEND.md` with wireframe concepts and component structure.
+- Adhered to schema defined in `DESIGN.md`.
+- Target stack: React + Tailwind CSS.
+[Mon, May 25, 2026  5:19:25 PM] Constructed GameShelf frontend skeleton with React and Tailwind CSS. Initial components and CatalogPage implemented.

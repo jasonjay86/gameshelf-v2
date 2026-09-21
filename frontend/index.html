@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GameShelf</title>
+    <style>body { font-family: sans-serif; padding: 20px; }</style>
+</head>
+<body>
+    <h1>GameShelf Catalog</h1>
+    <form id="gameForm">
+        <input type="text" id="title" placeholder="Title" required>
+        <input type="text" id="platform" placeholder="Platform" required>
+        <input type="text" id="status" placeholder="Status" required>
+        <button type="submit">Add Game</button>
+    </form>
+    <ul id="gameList"></ul>
+    <script>
+        async function loadGames() {
+            const res = await fetch('/api/games');
+            const json = await res.json();
+            const list = document.getElementById('gameList');
+            list.innerHTML = json.data.map(g => `<li>${g.title} (${g.platform}) - ${g.status}</li>`).join('');
+        }
+        document.getElementById('gameForm').onsubmit = async (e) => {
+            e.preventDefault();
+            await fetch('/api/games', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    title: document.getElementById('title').value,
+                    platform: document.getElementById('platform').value,
+                    status: document.getElementById('status').value
+                })
+            });
+            loadGames();
+        };
+        loadGames();
+    </script>
+</body>
+</html>
